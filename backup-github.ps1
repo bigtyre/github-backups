@@ -48,8 +48,3 @@ $regexResult.Matches | ForEach-Object {
   }
   break
 }
-
-
-# Create folders for the output
-
-# Backup each repository
