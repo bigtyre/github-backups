@@ -34,17 +34,20 @@ $regexResult.Matches | ForEach-Object {
     Remove-Item -Force -Recurse $repositoryDir
   }
 
-  Write-Output @{ Url = $url; Name = $repositoryName; UrlWithAuth = $urlWithAuth; BundleName = $bundleName } 
+  # Output the repository details
+  Write-Output @{ Url = $url; Name = $repositoryName; BundleName = $bundleName } 
 
+  # Clone the repository into $repositoryDir
   git clone --mirror $urlWithAuth $repositoryDir
+
+  # Create a git .bundle file and move it to the backups directory
   Set-Location $repositoryDir
   git bundle create $bundleName --all
   Move-Item -Force $bundleName $backupsDir
   Set-Location ..
 
-  # Remove directory if possible
+  # Remove the cloned directory
   if (Test-Path $repositoryDir) {
     Remove-Item -Force -Recurse $repositoryDir
   }
-  break
 }
