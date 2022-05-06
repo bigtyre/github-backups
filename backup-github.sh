@@ -13,20 +13,15 @@ cd git-repos
 for url in $urls
   do
     echo Url is $url
-    if [[ $url =~ ([A-Za-z_\-]+).git ]]
+    if [[ $url =~ ([A-Za-z0-9_\-]+)\.git ]]
     then
       repo=${BASH_REMATCH[0]}
       filename=${BASH_REMATCH[1]}
-      bundleName=$filename.bundle
+      bundleName="${filename}.bundle"
 
       replacement="s/https:\/\//https:\/\/${username}:${authToken}@/"
 
       gitUrl=$(echo $url | sed $replacement)
-
-      if [[ $filename == 'Sentinel' ]]
-      then
-        break
-      fi
 
       echo Repo is $repo
       echo Filename is $filename
