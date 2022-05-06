@@ -1,3 +1,6 @@
+# Force TLS 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 # Get the token and username
 $authToken = Get-Content .token
 $username = Get-Content .username
